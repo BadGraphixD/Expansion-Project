@@ -16,6 +16,7 @@ public class CustomItem {
     public CustomItem(Material material, int customModelData) {
         item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
+        assert meta != null;
         meta.setCustomModelData(customModelData);
         item.setItemMeta(meta);
         ItemManager.register(this);
@@ -23,6 +24,7 @@ public class CustomItem {
 
     public CustomItem addName(String name) {
         ItemMeta meta = item.getItemMeta();
+        assert meta != null;
         meta.setDisplayName(name);
         item.setItemMeta(meta);
         return this;
@@ -30,6 +32,7 @@ public class CustomItem {
 
     public CustomItem addLore(String... lore) {
         ItemMeta meta = item.getItemMeta();
+        assert meta != null;
         meta.setLore(Arrays.asList(lore));
         item.setItemMeta(meta);
         return this;
@@ -38,6 +41,7 @@ public class CustomItem {
     public CustomItem addGlow() {
         item.addUnsafeEnchantment(Enchantment.ARROW_INFINITE, 0);
         ItemMeta meta = item.getItemMeta();
+        assert meta != null;
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         item.setItemMeta(meta);
         return this;

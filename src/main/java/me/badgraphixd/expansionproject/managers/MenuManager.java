@@ -8,16 +8,15 @@ import java.util.Map;
 
 public class MenuManager {
 
-    private static Map<String, Menu> menuRegistry = new HashMap();
+    private static final Map<String, Menu> menuRegistry = new HashMap<>();
 
-    public static <T extends Menu> T register(T menu) {
+    public static void register(Menu menu) {
         String name = menu.getName();
         if (menuRegistry.containsKey(name)) {
             ExpansionProject.error("Registering duplicate menu name: \"" + name + "\"");
-            return null;
+            return;
         }
         menuRegistry.put(name, menu);
-        return menu;
     }
 
     public static Menu getMenuWithName(String name) {

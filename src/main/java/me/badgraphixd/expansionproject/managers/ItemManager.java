@@ -9,20 +9,19 @@ import java.util.Map;
 
 public class ItemManager {
 
-    private static Map<CustomItemIdentifier, CustomItem> itemRegistry = new HashMap();
+    private static final Map<CustomItemIdentifier, CustomItem> itemRegistry = new HashMap<>();
 
-    public static <T extends CustomItem> T register(T item) {
+    public static void register(CustomItem item) {
         CustomItemIdentifier id = CustomItemIdentifier.fromItem(item.getItem());
         if (id == null) {
             ExpansionProject.error("Registering invalid item");
-            return null;
+            return;
         }
         if (itemRegistry.containsKey(id)) {
             ExpansionProject.error("Registering duplicate item id: " + id);
-            return null;
+            return;
         }
         itemRegistry.put(id, item);
-        return item;
     }
 
     public static CustomItem getCustomItemWithId(CustomItemIdentifier id) {

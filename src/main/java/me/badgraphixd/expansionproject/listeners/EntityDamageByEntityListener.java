@@ -25,7 +25,7 @@ public class EntityDamageByEntityListener implements Listener {
             if (id != null) {
                 CustomItem customItem = ItemManager.getCustomItemWithId(id);
 
-                if (customItem != null && customItem instanceof AttackingItemOnEntity) {
+                if (customItem instanceof AttackingItemOnEntity) {
                     ((AttackingItemOnEntity) customItem).attackOnEntity(event);
                 }
             }

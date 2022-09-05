@@ -19,7 +19,7 @@ public class PlayerInteractEntityListener implements Listener {
         if (id != null) {
             CustomItem customItem = ItemManager.getCustomItemWithId(id);
 
-            if (customItem != null && customItem instanceof UsableItemOnEntity) {
+            if (customItem instanceof UsableItemOnEntity) {
                 ((UsableItemOnEntity) customItem).useOnEntity(event);
             }
         }
