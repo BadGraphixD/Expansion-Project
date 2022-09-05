@@ -14,14 +14,10 @@ public class CustomItem {
     protected ItemStack item;
 
     public CustomItem(Material material, int customModelData) {
-        this(new ItemStack(material));
+        item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
         meta.setCustomModelData(customModelData);
         item.setItemMeta(meta);
-    }
-
-    protected CustomItem(ItemStack item) {
-        this.item = item;
         ItemManager.register(this);
     }
 

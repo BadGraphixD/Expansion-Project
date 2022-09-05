@@ -1,4 +1,4 @@
-name: Expansion Project
+name: Expansion-Project
 version: '${project.version}'
 main: me.badgraphixd.expansionproject.ExpansionProject
 api-version: 1.19

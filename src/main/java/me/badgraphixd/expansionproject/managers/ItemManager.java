@@ -11,17 +11,18 @@ public class ItemManager {
 
     private static Map<CustomItemIdentifier, CustomItem> itemRegistry = new HashMap();
 
-    public static void register(CustomItem item) {
+    public static <T extends CustomItem> T register(T item) {
         CustomItemIdentifier id = CustomItemIdentifier.fromItem(item.getItem());
         if (id == null) {
             ExpansionProject.error("Registering invalid item");
-            return;
+            return null;
         }
         if (itemRegistry.containsKey(id)) {
-            ExpansionProject.error("Registering duplicate item id: " + id.toString());
-            return;
+            ExpansionProject.error("Registering duplicate item id: " + id);
+            return null;
         }
         itemRegistry.put(id, item);
+        return item;
     }
 
     public static CustomItem getCustomItemWithId(CustomItemIdentifier id) {

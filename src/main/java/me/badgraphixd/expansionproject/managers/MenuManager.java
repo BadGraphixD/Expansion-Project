@@ -10,13 +10,14 @@ public class MenuManager {
 
     private static Map<String, Menu> menuRegistry = new HashMap();
 
-    public static void register(Menu menu) {
+    public static <T extends Menu> T register(T menu) {
         String name = menu.getName();
         if (menuRegistry.containsKey(name)) {
             ExpansionProject.error("Registering duplicate menu name: \"" + name + "\"");
-            return;
+            return null;
         }
         menuRegistry.put(name, menu);
+        return menu;
     }
 
     public static Menu getMenuWithName(String name) {
