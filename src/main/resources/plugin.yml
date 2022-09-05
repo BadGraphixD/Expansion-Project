@@ -1,0 +1,6 @@
+name: Expansion Project
+version: '${project.version}'
+main: me.badgraphixd.expansionproject.ExpansionProject
+api-version: 1.19
+authors: [ Grphx ]
+description: Adds RPG functinality for the Expansion Project server
