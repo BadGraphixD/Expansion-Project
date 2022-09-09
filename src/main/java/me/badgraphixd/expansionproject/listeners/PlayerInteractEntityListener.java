@@ -1,6 +1,8 @@
 package me.badgraphixd.expansionproject.listeners;
 
+import me.badgraphixd.expansionproject.corpse.Corpse;
 import me.badgraphixd.expansionproject.item.*;
+import me.badgraphixd.expansionproject.managers.CorpseManager;
 import me.badgraphixd.expansionproject.managers.ItemManager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,6 +17,13 @@ public class PlayerInteractEntityListener implements Listener {
         EquipmentSlot hand = event.getHand();
         ItemStack item = event.getPlayer().getInventory().getItem(hand);
         CustomItemIdentifier id = CustomItemIdentifier.fromItem(item);
+
+        if (item == null) {
+            Corpse clickedCorpse = CorpseManager.find(event.getRightClicked());
+            if (clickedCorpse != null) {
+                clickedCorpse.loot(event.getPlayer());
+            }
+        }
 
         if (id != null) {
             CustomItem customItem = ItemManager.getCustomItemWithId(id);
