@@ -3,17 +3,14 @@ package me.badgraphixd.expansionproject.corpse;
 import me.badgraphixd.expansionproject.menu.menus.CorpseLootMenu;
 import me.badgraphixd.expansionproject.menu.menus.CorpseLootMenuInstance;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.util.EulerAngle;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Corpse {
@@ -23,7 +20,7 @@ public class Corpse {
     private final ArmorStand entity;
     private final List<CorpseItem> lootItems;
 
-    public Corpse(Location location, ItemStack skullItem, List<CorpseItem> lootItems) {
+    private Corpse(Location location, ItemStack skullItem, List<CorpseItem> lootItems) {
         this.entity = location.getWorld().spawn(location.clone().subtract(0, 1.5, 0), ArmorStand.class);
         entity.setVisible(false);
         entity.setInvulnerable(true);
@@ -44,11 +41,21 @@ public class Corpse {
         this.lootItems = lootItems;
     }
 
-    public Corpse(Player player) {
-        this(player.getLocation(), getSkullItem(player),
+    public static Corpse fromPlayer(Player player) {
+        return new Corpse(player.getLocation(), SkullUtil.getSkullItem(player),
                 Arrays.stream(player.getInventory().getContents())
                         .filter(Objects::nonNull).map(ItemStack::clone).map(CorpseItem::new).collect(Collectors.toList())
         );
+    }
+
+    public static Corpse fromEntity(Entity entity, List<ItemStack> drops) {
+        List<CorpseItem> lootItems = drops.stream().map(ItemStack::clone).map(CorpseItem::new).collect(Collectors.toList());
+
+        if (entity instanceof InventoryHolder) {
+            lootItems.addAll(Arrays.stream(((InventoryHolder) entity).getInventory().getContents())
+                .filter(Objects::nonNull).map(ItemStack::clone).map(CorpseItem::new).collect(Collectors.toList()));
+        }
+        return new Corpse(entity.getLocation(), SkullUtil.getSkullItem(entity), lootItems);
     }
 
     public boolean checkDespawn() {
@@ -74,14 +81,6 @@ public class Corpse {
 
     public List<CorpseItem> getLootItems() {
         return lootItems;
-    }
-
-    private static ItemStack getSkullItem(Player player) {
-        ItemStack item = new ItemStack(Material.PLAYER_HEAD);
-        SkullMeta meta = (SkullMeta) item.getItemMeta();
-        meta.setOwnerProfile(player.getPlayerProfile());
-        item.setItemMeta(meta);
-        return item;
     }
 
 }

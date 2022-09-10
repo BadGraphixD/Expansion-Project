@@ -14,7 +14,8 @@ public class PlayerDeathListener implements Listener {
     private void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
         if (!player.getLastDamageCause().getCause().equals(EntityDamageEvent.DamageCause.VOID)) {
-            CorpseManager.add(new Corpse(player));
+            CorpseManager.add(Corpse.fromPlayer(player));
+            event.getDrops().clear();
         }
     }
 }

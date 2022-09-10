@@ -7,6 +7,7 @@ public class ListenerManager {
 
     public static void init(JavaPlugin plugin) {
         plugin.getServer().getPluginManager().registerEvents(new EntityDamageByEntityListener(), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new EntityDeathListener(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new InventoryClickListener(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PlayerArmorStandManipulateListener(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PlayerDeathListener(), plugin);
