@@ -6,7 +6,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class MenuWithInstance<T extends MenuInstance> extends Menu {
+public abstract class MenuWithInstance extends Menu {
 
     private static final Map<Player, MenuInstance> playerInstanceMap = new HashMap<>();
 
@@ -14,8 +14,9 @@ public abstract class MenuWithInstance<T extends MenuInstance> extends Menu {
         super(name);
     }
 
-    public static void openInstance(Player player, MenuInstance instance) {
+    public void openInstance(Player player, MenuInstance instance) {
         playerInstanceMap.put(player, instance);
+        instance.setName(name);
         instance.open(player);
     }
 

@@ -1,14 +1,24 @@
 package me.badgraphixd.expansionproject;
 
+import me.badgraphixd.expansionproject.managers.CorpseManager;
 import me.badgraphixd.expansionproject.managers.ListenerManager;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class ExpansionProject extends JavaPlugin {
+
+    private int tickTask;
 
     @Override
     public void onEnable() {
 
         ListenerManager.init(this);
+
+        if (!Bukkit.getScheduler().isCurrentlyRunning(tickTask)) {
+            tickTask = Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
+                CorpseManager.tick();
+            }, 0, 1);
+        }
 
         message("Plugin started!");
     }
