@@ -1,24 +1,26 @@
 package me.badgraphixd.expansionproject.skill;
 
-public class SkillInstance {
+public abstract class SkillInstance <T extends Skill> {
 
-    private final Skill skill;
-    private float value;
+    protected final SkillSet set;
+    protected final T skill;
+    protected int level;
 
-    public SkillInstance(Skill skill, float value) {
+    public SkillInstance(SkillSet set, T skill, int level) {
+        this.set = set;
         this.skill = skill;
-        this.value = value;
+        this.level = level;
     }
 
-    public Skill getSkill() {
+    public SkillSet getSet() {
+        return set;
+    }
+
+    public T getSkill() {
         return skill;
     }
 
-    public float getValue() {
-        return value;
-    }
-
-    public void setValue(float value) {
-        this.value = value;
+    public int getLevel() {
+        return level;
     }
 }

@@ -1,5 +1,7 @@
 package me.badgraphixd.expansionproject.skill;
 
+import java.util.List;
+
 public enum ChildSkill implements Skill {
 
     // only examples
@@ -67,6 +69,20 @@ public enum ChildSkill implements Skill {
     ROCK_MINING,
     WOOD_MINING,
     SIEVE_MINING,
-    DIGGING_MINING,
+    DIGGING_MINING;
+
+    private ParentSkill parentSkill;
+
+    public void setParentSkill(ParentSkill parentSkill) {
+        this.parentSkill = parentSkill;
+    }
+
+    public ParentSkill getParentSkill() {
+        return parentSkill;
+    }
+
+    public List<ChildSkill> getRelatedSkills() {
+        return parentSkill.getChildSkills();
+    }
 
 }
