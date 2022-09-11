@@ -1,10 +1,26 @@
 package me.badgraphixd.expansionproject.skill;
 
+import org.bson.Document;
+
 public class ParentSkillInstance extends SkillInstance<ParentSkill> {
 
     public ParentSkillInstance(SkillSet set, ParentSkill skill) {
-        super(set, skill, 0);
+        this(set, skill, 0);
+    }
+
+    public ParentSkillInstance(SkillSet set, ParentSkill skill, int level) {
+        super(set, skill, level);
         updateLevel();
+    }
+
+    public ParentSkillInstance(SkillSet set, ParentSkill skill, Document document) {
+        super(set, skill, document.getInteger("level"));
+    }
+
+    @Override
+    public Document toDocument() {
+        return new Document()
+            .append("level", level);
     }
 
     public void updateLevel() {

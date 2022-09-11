@@ -1,5 +1,7 @@
 package me.badgraphixd.expansionproject.skill;
 
+import org.bson.Document;
+
 public abstract class SkillInstance <T extends Skill> {
 
     protected final SkillSet set;
@@ -23,4 +25,6 @@ public abstract class SkillInstance <T extends Skill> {
     public int getLevel() {
         return level;
     }
+
+    public abstract Document toDocument();
 }

@@ -1,5 +1,7 @@
 package me.badgraphixd.expansionproject.skill;
 
+import org.bson.Document;
+
 import java.util.Random;
 
 public class ChildSkillInstance extends SkillInstance<ChildSkill> {
@@ -17,6 +19,17 @@ public class ChildSkillInstance extends SkillInstance<ChildSkill> {
     public ChildSkillInstance(SkillSet set, ChildSkill skill, int level, int experience) {
         super(set, skill, level);
         this.experience = experience;
+    }
+
+    public ChildSkillInstance(SkillSet set, ChildSkill skill, Document document) {
+        this(set, skill, document.getInteger("level"), document.getInteger("experience"));
+    }
+
+    @Override
+    public Document toDocument() {
+        return new Document()
+            .append("level", level)
+            .append("experience", experience);
     }
 
     public void addExperience(int experience) {

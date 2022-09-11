@@ -1,7 +1,9 @@
 package me.badgraphixd.expansionproject;
 
 import me.badgraphixd.expansionproject.managers.CorpseManager;
+import me.badgraphixd.expansionproject.managers.DatabaseManager;
 import me.badgraphixd.expansionproject.managers.ListenerManager;
+import me.badgraphixd.expansionproject.managers.PlayerDataManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -12,11 +14,14 @@ public final class ExpansionProject extends JavaPlugin {
     @Override
     public void onEnable() {
 
+        DatabaseManager.init(this);
+        PlayerDataManager.init(this);
         ListenerManager.init(this);
 
         if (!Bukkit.getScheduler().isCurrentlyRunning(tickTask)) {
             tickTask = Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
                 CorpseManager.tick();
+                PlayerDataManager.tick();
             }, 0, 1);
         }
 
