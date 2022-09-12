@@ -14,17 +14,5 @@ public abstract class SkillInstance <T extends Skill> {
         this.level = level;
     }
 
-    public SkillSet getSet() {
-        return set;
-    }
-
-    public T getSkill() {
-        return skill;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
     public abstract Document toDocument();
 }
