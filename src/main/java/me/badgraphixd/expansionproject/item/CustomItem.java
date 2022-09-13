@@ -48,7 +48,7 @@ public class CustomItem {
     }
 
     public ItemStack getItem() {
-        return item;
+        return item.clone();
     }
 
 }
