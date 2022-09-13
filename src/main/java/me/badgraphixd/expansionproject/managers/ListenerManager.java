@@ -15,6 +15,7 @@ public class ListenerManager {
         plugin.getServer().getPluginManager().registerEvents(new PlayerInteractListener(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PlayerJoinListener(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PlayerQuitListener(), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new PrepareItemCraftListener(), plugin);
     }
 
 }

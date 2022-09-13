@@ -12,13 +12,15 @@ import java.util.Arrays;
 public class CustomItem {
 
     protected ItemStack item;
+    protected boolean isSeparateItem;
 
-    public CustomItem(Material material, int customModelData) {
+    public CustomItem(Material material, int customModelData, boolean isSeparateItem) {
         item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
         assert meta != null;
         meta.setCustomModelData(customModelData);
         item.setItemMeta(meta);
+        this.isSeparateItem = isSeparateItem;
         ItemManager.register(this);
     }
 
@@ -48,7 +50,9 @@ public class CustomItem {
     }
 
     public ItemStack getItem() {
-        return item.clone();
+        return item;
     }
+
+    public boolean isSeparateItem() { return isSeparateItem; }
 
 }
