@@ -1,4 +1,4 @@
 db-connection-link: ""
 db-database-name: "expansion_project"
 db-player-data-collection-name: "player_data"
-player-data-unload-time: 300
+player-data-unload-time: 10

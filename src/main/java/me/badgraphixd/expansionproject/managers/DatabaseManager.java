@@ -17,6 +17,7 @@ public class DatabaseManager {
     private static MongoCollection<Document> playerDataCollection;
 
     public static void init(JavaPlugin plugin) {
+        System.out.println(plugin.getConfig().getString("db-connection-link"));
         mongoClient = MongoClients.create(plugin.getConfig().getString("db-connection-link"));
         database = mongoClient.getDatabase(plugin.getConfig().getString("db-database-name"));
         playerDataCollection = database.getCollection(plugin.getConfig().getString("db-player-data-collection-name"));
@@ -26,8 +27,8 @@ public class DatabaseManager {
         return playerDataCollection.find(new Document("uuid", uuid.toString())).first();
     }
 
-    public static Document updatePlayerData(UUID uuid, Document document) {
-        return playerDataCollection.findOneAndReplace(new Document("uuid", uuid.toString()), document);
+    public static void updatePlayerData(UUID uuid, Document document) {
+        playerDataCollection.findOneAndReplace(new Document("uuid", uuid.toString()), document);
     }
 
     public static void createPlayerData(Document document) {

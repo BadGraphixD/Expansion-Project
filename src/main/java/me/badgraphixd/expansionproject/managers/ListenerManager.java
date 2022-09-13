@@ -13,6 +13,8 @@ public class ListenerManager {
         plugin.getServer().getPluginManager().registerEvents(new PlayerDeathListener(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PlayerInteractEntityListener(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PlayerInteractListener(), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new PlayerJoinListener(), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new PlayerQuitListener(), plugin);
     }
 
 }

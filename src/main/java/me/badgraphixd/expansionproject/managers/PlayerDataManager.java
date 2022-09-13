@@ -1,7 +1,13 @@
 package me.badgraphixd.expansionproject.managers;
 
 import me.badgraphixd.expansionproject.ExpansionProject;
+import me.badgraphixd.expansionproject.magic.mana.ManaContainer;
+import me.badgraphixd.expansionproject.magic.mana.ManaType;
 import me.badgraphixd.expansionproject.player.PlayerData;
+import me.badgraphixd.expansionproject.role.Profile;
+import me.badgraphixd.expansionproject.role.Race;
+import me.badgraphixd.expansionproject.role.Role;
+import me.badgraphixd.expansionproject.skill.SkillSet;
 import org.bson.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -52,15 +58,16 @@ public class PlayerDataManager {
             long diff = TimeUnit.MILLISECONDS.toSeconds(currentDate.getTime() - data.lastOnline.getTime());
             if (diff < PLAYER_DATA_UNLOAD_TIME) continue;
 
+            DatabaseManager.updatePlayerData(data.data.getUuid(), data.data.toDocument());
             i.remove();
         }
     }
 
-    public static boolean loadPlayerData(Player player) {
+    public static void loadPlayerData(Player player) {
         for (CachedPlayerData data : playerDataCache) {
             if (data.data.getUuid().equals(player.getUniqueId())) {
                 data.online = true;
-                return true;
+                return;
             }
         }
 
@@ -68,11 +75,20 @@ public class PlayerDataManager {
 
         if (document != null) {
             playerDataCache.add(new CachedPlayerData(new PlayerData(document), new Date(), true));
-            return true;
+            return;
         }
 
-        // No player data exists -> new player
-        return false;
+        // Player with unlimited mana for testing
+        // Todo: replace with proper player profile creation
+        ManaContainer filledManaContainer = new ManaContainer();
+        filledManaContainer.set(ManaType.NORMAL, 1000000000);
+        filledManaContainer.set(ManaType.FIRE, 1000000000);
+        filledManaContainer.set(ManaType.NECROMANTIC, 1000000000);
+        Profile profile = new Profile(Race.DARK_ELF, Role.ADVENTURER);
+        PlayerData newPlayerData = new PlayerData(player.getUniqueId(), new SkillSet(profile), filledManaContainer, profile);
+        playerDataCache.add(new CachedPlayerData(newPlayerData, new Date(), true));
+
+        DatabaseManager.createPlayerData(newPlayerData.toDocument());
     }
 
     public static void setPlayerOffline(Player player) {
