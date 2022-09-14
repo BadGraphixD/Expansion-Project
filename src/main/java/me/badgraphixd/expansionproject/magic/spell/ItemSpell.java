@@ -15,6 +15,8 @@ public class ItemSpell extends Spell {
     public static final int ON_BLOCK = 1 << 1;
     public static final int ON_ENTITY = 1 << 2;
 
+    public static final int ON_EVERYTHING = IN_AIR | ON_BLOCK | ON_ENTITY;
+
     protected final int flags;
 
     public ItemSpell(String name, ManaType manaType, int manaCost, int flags) {

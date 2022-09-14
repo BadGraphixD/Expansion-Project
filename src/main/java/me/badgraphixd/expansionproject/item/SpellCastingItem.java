@@ -30,8 +30,8 @@ public class SpellCastingItem extends CustomItem implements
 
     private final CastingType castingType;
 
-    public SpellCastingItem(Material material, int customModelData, CastingType castingType) {
-        super(material, customModelData);
+    public SpellCastingItem(Material material, int customModelData, boolean isSeparateItem, CastingType castingType) {
+        super(material, customModelData, isSeparateItem);
         this.castingType = castingType;
     }
 
