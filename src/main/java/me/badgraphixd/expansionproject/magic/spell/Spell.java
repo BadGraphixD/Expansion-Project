@@ -51,8 +51,10 @@ public class Spell {
     }
 
     public void cast(EffectInvocation invocation, ManaContainer manaContainer, float relativeSkillLevel) {
-        manaContainer.subtract(manaType, manaCost);
-        cast(invocation, relativeSkillLevel);
+        if (canCast(manaContainer)) {
+            manaContainer.subtract(manaType, manaCost);
+            cast(invocation, relativeSkillLevel);
+        }
     }
 
     public void cast(EffectInvocation invocation, PlayerData data) {
