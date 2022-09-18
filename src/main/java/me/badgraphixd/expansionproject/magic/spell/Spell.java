@@ -2,7 +2,7 @@ package me.badgraphixd.expansionproject.magic.spell;
 
 import me.badgraphixd.expansionproject.magic.Effect;
 import me.badgraphixd.expansionproject.magic.EffectInvocation;
-import me.badgraphixd.expansionproject.magic.mana.ManaContainer;
+import me.badgraphixd.expansionproject.magic.mana.FiniteManaContainer;
 import me.badgraphixd.expansionproject.magic.mana.ManaType;
 import me.badgraphixd.expansionproject.managers.SpellManager;
 import me.badgraphixd.expansionproject.player.PlayerData;
@@ -39,7 +39,7 @@ public class Spell {
         return this;
     }
 
-    public boolean canCast(ManaContainer manaContainer) {
+    public boolean canCast(FiniteManaContainer manaContainer) {
         return manaContainer.get(manaType) >= manaCost;
     }
 
@@ -50,7 +50,7 @@ public class Spell {
         }
     }
 
-    public void cast(EffectInvocation invocation, ManaContainer manaContainer, float relativeSkillLevel) {
+    public void cast(EffectInvocation invocation, FiniteManaContainer manaContainer, float relativeSkillLevel) {
         if (canCast(manaContainer)) {
             manaContainer.subtract(manaType, manaCost);
             cast(invocation, relativeSkillLevel);

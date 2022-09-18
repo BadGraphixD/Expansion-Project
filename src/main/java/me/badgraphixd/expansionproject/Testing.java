@@ -64,6 +64,9 @@ public class Testing {
         for (Player player : Bukkit.getOnlinePlayers()) {
             player.getInventory().addItem(SpellCastingItem.attachSpells(wand.getItem(), testSpell));
             player.getInventory().addItem(netherAlloy.getItem());
+
+            //EntityGoblin goblinEntity = new EntityGoblin(player.getLocation());
+            //((CraftWorld)player.getWorld()).getHandle().addFreshEntity(goblinEntity, CreatureSpawnEvent.SpawnReason.CUSTOM);
         }
     }
 

@@ -19,6 +19,7 @@ public final class ExpansionProject extends JavaPlugin {
 
         instance = this;
 
+        PacketManager.init(this);
         DatabaseManager.init(this);
         PlayerDataManager.init(this);
         ListenerManager.init(this);

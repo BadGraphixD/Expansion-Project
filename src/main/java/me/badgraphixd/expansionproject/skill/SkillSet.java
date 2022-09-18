@@ -44,7 +44,14 @@ public class SkillSet {
                 int numberOfChildSkills = parentSkillInstance.skill.getChildSkills().size();
                 int levelsToDistribute = parentSkillInstance.level * numberOfChildSkills;
                 for (int i = 0; i < levelsToDistribute; i++) {
-                    skillInstances.get(parentSkillInstance.skill.getChildSkills().get(rand.nextInt(numberOfChildSkills))).level++;
+                    int j = rand.nextInt(numberOfChildSkills);
+                    for (ChildSkill childSkill : parentSkillInstance.skill.getChildSkills()) {
+                        if (j == 0) {
+                            skillInstances.get(childSkill).level++;
+                            break;
+                        }
+                        j--;
+                    }
                 }
             }
         }

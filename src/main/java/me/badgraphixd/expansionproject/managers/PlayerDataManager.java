@@ -1,7 +1,7 @@
 package me.badgraphixd.expansionproject.managers;
 
 import me.badgraphixd.expansionproject.ExpansionProject;
-import me.badgraphixd.expansionproject.magic.mana.ManaContainer;
+import me.badgraphixd.expansionproject.magic.mana.FiniteManaContainer;
 import me.badgraphixd.expansionproject.magic.mana.ManaType;
 import me.badgraphixd.expansionproject.player.PlayerData;
 import me.badgraphixd.expansionproject.role.Profile;
@@ -80,7 +80,7 @@ public class PlayerDataManager {
 
         // Player with unlimited mana for testing
         // Todo: replace with proper player profile creation
-        ManaContainer filledManaContainer = new ManaContainer();
+        FiniteManaContainer filledManaContainer = new FiniteManaContainer();
         filledManaContainer.set(ManaType.NORMAL, 1000000000);
         filledManaContainer.set(ManaType.FIRE, 1000000000);
         filledManaContainer.set(ManaType.NECROMANTIC, 1000000000);
