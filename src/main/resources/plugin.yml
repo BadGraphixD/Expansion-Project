@@ -2,6 +2,6 @@ name: Expansion-Project
 version: '${project.version}'
 main: me.badgraphixd.expansionproject.ExpansionProject
 api-version: 1.19
-authors: [ Grphx ]
+authors: [Grphx]
 description: Adds RPG functinality for the Expansion Project server
-depend: [ NBTAPI, ProtocolLib ]
+depend: [NBTAPI, ProtocolLib]

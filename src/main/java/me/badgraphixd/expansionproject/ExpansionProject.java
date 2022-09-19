@@ -29,6 +29,7 @@ public final class ExpansionProject extends JavaPlugin {
         if (!Bukkit.getScheduler().isCurrentlyRunning(tickTask)) {
             tickTask = Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
                 CorpseManager.tick();
+                BrokenBlockManager.tick();
                 PlayerDataManager.tick();
                 PlayerGUIManager.tick();
             }, 0, 1);
