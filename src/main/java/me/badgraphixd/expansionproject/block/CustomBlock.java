@@ -1,18 +1,24 @@
 package me.badgraphixd.expansionproject.block;
 
 import me.badgraphixd.expansionproject.managers.BlockManager;
+import me.badgraphixd.expansionproject.managers.BrokenBlockManager;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.MultipleFacing;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class CustomBlock {
 
     private final CustomBlockState state;
     private final float hardness;
+    private final List<BrokenBlockManager.ToolType> toolTypes;
 
-    public CustomBlock(CustomBlockState state, float hardness) {
+    public CustomBlock(CustomBlockState state, float hardness, BrokenBlockManager.ToolType... toolTypes) {
         this.state = state;
         this.hardness = hardness;
+        this.toolTypes = Arrays.asList(toolTypes);
         BlockManager.register(this);
     }
 
@@ -34,6 +40,10 @@ public class CustomBlock {
 
     public float getHardness() {
         return hardness;
+    }
+
+    public List<BrokenBlockManager.ToolType> getToolTypes() {
+        return toolTypes;
     }
 
 }
